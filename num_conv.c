@@ -1,17 +1,22 @@
 // Decimal to binary, octal and hexa-decimal converter
 
 #include <stdio.h>
+#include <string.h>
+#include <math.h>
 
 int main(){
     int num, i = 0;
-    int bin[32];
+    char bin[32];
     char hexaDigits[] = "0123456789ABCDEF";
     int choice;
+    int len;
+    int decimal = 0;
 
     printf("What do you want: \n");
     printf("1. Decimal to Binary\n");
     printf("2. Decimal to Octal\n");
     printf("3. Decimal to Hexa-Decimal\n");
+    printf("4. Binary to Decimal\n");
     
     scanf("%d",&choice);
 
@@ -45,6 +50,22 @@ int main(){
             printf("%c",hexaDigits[bin[j]]);
         }
         printf("\n");
+    }else if(choice == 4){
+        printf("Enter your binary number: \n");
+        scanf("%32s",&bin);
+
+        len = strlen(bin);
+
+        for(int i = 0; i < len; i++){
+            if(bin[i] == '1'){
+                decimal += pow(2, len - 1 - i);
+            }else if(bin[i] != '0'){
+                printf("Enter correct binary number only 0 and 1\n");
+                return 1;
+            }
+        }
+
+        printf("Decimal value: %d", decimal);
     }
 
     return 0;
